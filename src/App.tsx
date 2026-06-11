@@ -163,39 +163,40 @@ const AccentCard = styled('div')`
 
 const formField = css`
   width: 100%;
-  border-radius: 1.5rem;
-  border: 2.5px solid rgba(6, 182, 212, 0.6);
-  background: linear-gradient(135deg, rgba(20, 30, 50, 0.95), rgba(25, 35, 60, 0.95));
-  padding: 1.2rem 1.5rem;
-  color: #e2e8f0;
+  border-radius: 1.75rem;
+  border: 3px solid #06b6d4;
+  background: linear-gradient(135deg, rgba(12, 74, 110, 0.4), rgba(14, 165, 233, 0.15));
+  padding: 1.3rem 1.8rem;
+  color: #ffffff;
   outline: none;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  font-size: 1.05rem;
-  font-weight: 600;
-  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1), inset 0 1px 2px rgba(6, 182, 212, 0.1);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 6px 30px rgba(6, 182, 212, 0.25), inset 0 1px 3px rgba(34, 211, 238, 0.2), 0 0 1px rgba(34, 211, 238, 0.5);
+  letter-spacing: 0.3px;
   
   &::placeholder {
-    color: rgba(226, 232, 240, 0.6);
-    font-weight: 500;
-    transition: color 0.3s ease;
+    color: rgba(226, 232, 240, 0.7);
+    font-weight: 600;
+    transition: color 0.4s ease;
   }
 
   &:hover {
-    border-color: rgba(34, 211, 238, 0.9);
-    background: linear-gradient(135deg, rgba(20, 30, 50, 1), rgba(25, 35, 60, 1));
-    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.25), inset 0 1px 3px rgba(6, 182, 212, 0.15);
-    transform: translateY(-3px);
+    border-color: #22d3ee;
+    background: linear-gradient(135deg, rgba(12, 74, 110, 0.5), rgba(14, 165, 233, 0.25));
+    box-shadow: 0 10px 50px rgba(34, 211, 238, 0.4), inset 0 2px 4px rgba(34, 211, 238, 0.25), 0 0 20px rgba(6, 182, 212, 0.3);
+    transform: translateY(-5px) scale(1.01);
   }
 
   &:focus {
-    border-color: rgba(34, 211, 238, 1);
-    background: linear-gradient(135deg, rgba(15, 25, 45, 1), rgba(20, 30, 55, 1));
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), 0 12px 40px rgba(6, 182, 212, 0.35), inset 0 2px 4px rgba(34, 211, 238, 0.1);
-    transform: translateY(-4px);
+    border-color: #22d3ee;
+    background: linear-gradient(135deg, rgba(12, 74, 110, 0.6), rgba(14, 165, 233, 0.35));
+    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2), 0 15px 60px rgba(34, 211, 238, 0.5), inset 0 3px 8px rgba(34, 211, 238, 0.15), 0 0 30px rgba(6, 182, 212, 0.4);
+    transform: translateY(-6px) scale(1.02);
   }
 
   &:focus::placeholder {
-    color: rgba(226, 232, 240, 0.8);
+    color: rgba(226, 232, 240, 0.9);
   }
 `
 
@@ -446,9 +447,9 @@ function ContactPage() {
         ))}
       </div>
 
-      <div className="rounded-[2rem] border-2 border-cyan-500/40 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-950/95 p-10 shadow-2xl shadow-cyan-500/20 transition duration-500 ease-in-out dark:from-slate-950/98 dark:via-slate-900/95 dark:to-slate-950/98 dark:shadow-cyan-500/25">
-        <h3 className="mb-8 text-2xl font-bold text-white flex items-center gap-3">
-          <span className="text-3xl">🎓</span>
+      <div className="rounded-[2.5rem] border-3 border-cyan-400/50 bg-gradient-to-br from-slate-950/98 via-cyan-950/40 to-slate-900/95 p-12 shadow-2xl shadow-cyan-500/30 transition duration-500 ease-in-out backdrop-blur-sm">
+        <h3 className="mb-10 text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-200 to-blue-300 flex items-center gap-3 drop-shadow-lg">
+          <span className="text-4xl animate-bounce" style={{animationDelay: '0s'}}>🎓</span>
           Start Your Coding Journey Today!
         </h3>
         <Formik
@@ -479,27 +480,27 @@ function ContactPage() {
         >
           {({ errors, touched }) => (
             <Form className="space-y-7">
-              <div className="transform transition duration-300 hover:scale-[1.01]">
-                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">👤</span>
+              <div className="transform transition duration-300 hover:scale-[1.01] p-4 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 hover:from-cyan-500/10 hover:to-blue-500/10">
+                <label className="block text-lg font-bold text-cyan-200 mb-3 flex items-center gap-3">
+                  <span className="text-3xl">👤</span>
                   Full name
                 </label>
                 <Field id="fullName" name="fullName" placeholder="e.g., Priya Sharma" css={formField} className={`${errors.fullName && touched.fullName ? 'border-red-500/70' : ''}`} />
                 <ErrorMessage name="fullName" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <div className="transform transition duration-300 hover:scale-[1.01]">
-                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">📧</span>
+              <div className="transform transition duration-300 hover:scale-[1.01] p-4 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 hover:from-cyan-500/10 hover:to-blue-500/10">
+                <label className="block text-lg font-bold text-cyan-200 mb-3 flex items-center gap-3">
+                  <span className="text-3xl">📧</span>
                   Email address
                 </label>
                 <Field id="email" name="email" type="email" placeholder="your.email@example.com" css={formField} className={`${errors.email && touched.email ? 'border-red-500/70' : ''}`} />
                 <ErrorMessage name="email" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <div className="transform transition duration-300 hover:scale-[1.01]">
-                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🎯</span>
+              <div className="transform transition duration-300 hover:scale-[1.01] p-4 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 hover:from-cyan-500/10 hover:to-blue-500/10">
+                <label className="block text-lg font-bold text-cyan-200 mb-3 flex items-center gap-3">
+                  <span className="text-3xl">🎯</span>
                   Learning focus
                 </label>
                 <Field as="select" id="interest" name="interest" css={formField} className={`${errors.interest && touched.interest ? 'border-red-500/70' : ''}`}>
@@ -511,9 +512,9 @@ function ContactPage() {
                 <ErrorMessage name="interest" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <div className="transform transition duration-300 hover:scale-[1.01]">
-                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">💭</span>
+              <div className="transform transition duration-300 hover:scale-[1.01] p-4 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 hover:from-cyan-500/10 hover:to-blue-500/10">
+                <label className="block text-lg font-bold text-cyan-200 mb-3 flex items-center gap-3">
+                  <span className="text-3xl">💭</span>
                   Your goals
                 </label>
                 <Field as="textarea" id="message" name="message" rows={4} placeholder="What do you want to build? What's your dream project?" css={formField} className={`${errors.message && touched.message ? 'border-red-500/70' : ''}`} />
