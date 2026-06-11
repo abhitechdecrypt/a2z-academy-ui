@@ -163,16 +163,71 @@ const AccentCard = styled('div')`
 
 const formField = css`
   width: 100%;
-  border-radius: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: rgba(15, 23, 42, 0.9);
-  padding: 0.9rem 1rem;
+  border-radius: 1.5rem;
+  border: 2.5px solid rgba(6, 182, 212, 0.6);
+  background: linear-gradient(135deg, rgba(20, 30, 50, 0.95), rgba(25, 35, 60, 0.95));
+  padding: 1.2rem 1.5rem;
   color: #e2e8f0;
   outline: none;
-  transition: all 0.22s ease;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1), inset 0 1px 2px rgba(6, 182, 212, 0.1);
+  
+  &::placeholder {
+    color: rgba(226, 232, 240, 0.6);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.9);
+    background: linear-gradient(135deg, rgba(20, 30, 50, 1), rgba(25, 35, 60, 1));
+    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.25), inset 0 1px 3px rgba(6, 182, 212, 0.15);
+    transform: translateY(-3px);
+  }
+
   &:focus {
-    border-color: rgba(34, 211, 238, 0.82);
-    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+    border-color: rgba(34, 211, 238, 1);
+    background: linear-gradient(135deg, rgba(15, 25, 45, 1), rgba(20, 30, 55, 1));
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), 0 12px 40px rgba(6, 182, 212, 0.35), inset 0 2px 4px rgba(34, 211, 238, 0.1);
+    transform: translateY(-4px);
+  }
+
+  &:focus::placeholder {
+    color: rgba(226, 232, 240, 0.8);
+  }
+`
+
+const SubmitButton = styled('button')`
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(34, 211, 238, 0.4), 0 0 30px rgba(34, 211, 238, 0.2);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(34, 211, 238, 0.3);
   }
 `
 
@@ -335,6 +390,36 @@ function ProjectsPage() {
           </article>
         ))}
       </div>
+
+      <div className="grid gap-6 xl:grid-cols-2">
+        <div className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-8 shadow-2xl shadow-slate-950/10 transition duration-500 ease-in-out dark:border-slate-800/80 dark:bg-slate-950/85 dark:text-slate-100">
+          <p className="text-sm uppercase tracking-[0.32em] text-cyan-600 dark:text-cyan-300/80">Roadmap</p>
+          <h3 className="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">What students master next.</h3>
+          <div className="mt-6 space-y-4">
+            {roadmap.map((stage) => (
+              <div key={stage.step} className="rounded-3xl bg-slate-50 p-5 dark:bg-slate-900/80">
+                <p className="text-sm uppercase tracking-[0.28em] text-slate-500 dark:text-slate-400">{stage.step}</p>
+                <h4 className="mt-2 text-xl font-semibold text-slate-950 dark:text-white">{stage.title}</h4>
+                <p className="mt-2 text-slate-600 dark:text-slate-300">{stage.details}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-8 shadow-2xl shadow-slate-950/10 transition duration-500 ease-in-out dark:border-slate-800/80 dark:bg-slate-950/85 dark:text-slate-100">
+          <p className="text-sm uppercase tracking-[0.32em] text-cyan-600 dark:text-cyan-300/80">Student feedback</p>
+          <h3 className="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Real outcomes from recent learners.</h3>
+          <div className="mt-6 space-y-4">
+            {testimonials.map((item) => (
+              <div key={item.name} className="rounded-3xl bg-slate-50 p-5 dark:bg-slate-900/80">
+                <p className="text-slate-700 dark:text-slate-200">“{item.quote}”</p>
+                <p className="mt-3 text-sm font-semibold text-slate-950 dark:text-white">{item.name}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{item.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -350,75 +435,94 @@ function ContactPage() {
         </p>
       </div>
 
-      <div className="rounded-[2rem] border border-slate-200/80 bg-white/90 p-8 shadow-2xl shadow-slate-950/10 transition duration-500 ease-in-out dark:border-slate-800/80 dark:bg-slate-950/85 dark:text-slate-100">
+      <div className="grid gap-4 md:grid-cols-3">
+        {schedule.map((item) => (
+          <div key={item.title} className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 text-slate-950 shadow-sm shadow-slate-950/5 transition dark:border-slate-800/80 dark:bg-slate-900/85 dark:text-slate-100">
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-600 dark:text-cyan-300/80">{item.title}</p>
+            <p className="mt-3 text-lg font-semibold">{item.date}</p>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{item.time}</p>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{item.seats}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-[2rem] border-2 border-cyan-500/40 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-950/95 p-10 shadow-2xl shadow-cyan-500/20 transition duration-500 ease-in-out dark:from-slate-950/98 dark:via-slate-900/95 dark:to-slate-950/98 dark:shadow-cyan-500/25">
+        <h3 className="mb-8 text-2xl font-bold text-white flex items-center gap-3">
+          <span className="text-3xl">🎓</span>
+          Start Your Coding Journey Today!
+        </h3>
         <Formik
           initialValues={{ fullName: '', email: '', interest: '', message: '' }}
           validate={(values) => {
             const errors: Record<string, string> = {}
             if (!values.fullName.trim()) {
-              errors.fullName = 'Full name is required'
+              errors.fullName = '✨ Please tell us your name'
             }
             if (!values.email) {
-              errors.email = 'Email is required'
+              errors.email = '📧 Email is required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-              errors.email = 'Invalid email address'
+              errors.email = '❌ Invalid email address'
             }
             if (!values.interest.trim()) {
-              errors.interest = 'Please select an interest'
+              errors.interest = '🎯 Pick your learning path'
             }
             if (!values.message.trim()) {
-              errors.message = 'Tell us a little about your goals'
+              errors.message = '💭 Tell us what you want to achieve'
             }
             return errors
           }}
           onSubmit={(values, { resetForm }) => {
             console.log('Contact request', values)
-            alert('Thanks! Your request has been submitted.')
+            alert('🎉 Thanks! Your request has been submitted. We\'ll be in touch soon!')
             resetForm()
           }}
         >
-          {() => (
-            <Form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300" htmlFor="fullName">
+          {({ errors, touched }) => (
+            <Form className="space-y-7">
+              <div className="transform transition duration-300 hover:scale-[1.01]">
+                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                  <span className="text-2xl">👤</span>
                   Full name
                 </label>
-                <Field id="fullName" name="fullName" placeholder="Your name" css={formField} />
-                <ErrorMessage name="fullName" component="div" className="mt-2 text-sm text-rose-400" />
+                <Field id="fullName" name="fullName" placeholder="e.g., Priya Sharma" css={formField} className={`${errors.fullName && touched.fullName ? 'border-red-500/70' : ''}`} />
+                <ErrorMessage name="fullName" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300" htmlFor="email">
+              <div className="transform transition duration-300 hover:scale-[1.01]">
+                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                  <span className="text-2xl">📧</span>
                   Email address
                 </label>
-                <Field id="email" name="email" type="email" placeholder="you@example.com" css={formField} />
-                <ErrorMessage name="email" component="div" className="mt-2 text-sm text-rose-400" />
+                <Field id="email" name="email" type="email" placeholder="your.email@example.com" css={formField} className={`${errors.email && touched.email ? 'border-red-500/70' : ''}`} />
+                <ErrorMessage name="email" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300" htmlFor="interest">
+              <div className="transform transition duration-300 hover:scale-[1.01]">
+                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                  <span className="text-2xl">🎯</span>
                   Learning focus
                 </label>
-                <Field as="select" id="interest" name="interest" css={formField}>
-                  <option value="">Choose a path</option>
-                  <option value="beginner">Beginner logic & fundamentals</option>
-                  <option value="frontend">Frontend portfolio</option>
-                  <option value="enterprise">Enterprise & certification</option>
+                <Field as="select" id="interest" name="interest" css={formField} className={`${errors.interest && touched.interest ? 'border-red-500/70' : ''}`}>
+                  <option value="">✨ Choose your path...</option>
+                  <option value="beginner">🌱 Beginner logic & fundamentals</option>
+                  <option value="frontend">🎨 Frontend portfolio</option>
+                  <option value="enterprise">🏢 Enterprise & certification</option>
                 </Field>
-                <ErrorMessage name="interest" component="div" className="mt-2 text-sm text-rose-400" />
+                <ErrorMessage name="interest" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300" htmlFor="message">
+              <div className="transform transition duration-300 hover:scale-[1.01]">
+                <label className="block text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                  <span className="text-2xl">💭</span>
                   Your goals
                 </label>
-                <Field as="textarea" id="message" name="message" rows={4} placeholder="Tell us what you want to achieve" css={formField} />
-                <ErrorMessage name="message" component="div" className="mt-2 text-sm text-rose-400" />
+                <Field as="textarea" id="message" name="message" rows={4} placeholder="What do you want to build? What's your dream project?" css={formField} className={`${errors.message && touched.message ? 'border-red-500/70' : ''}`} />
+                <ErrorMessage name="message" component="div" className="mt-3 text-sm font-bold text-red-400 flex items-center gap-1" />
               </div>
 
-              <button type="submit" className="inline-flex items-center justify-center rounded-3xl bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">
-                Request a free consultation
-              </button>
+              <SubmitButton type="submit" className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-400 to-blue-500 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-cyan-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/60 active:scale-95">
+                <span>🚀 Join the Academy Now</span>
+              </SubmitButton>
             </Form>
           )}
         </Formik>
@@ -436,7 +540,12 @@ function App() {
   })
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
+    const root = document.documentElement
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
     localStorage.setItem(themeStorageKey, theme)
   }, [theme])
 
